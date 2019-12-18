@@ -79,6 +79,7 @@ try:
     import errno
     import traceback
     import signal
+    import typing
 except ImportError, e:
     raise ImportError(str(e) + """
 
@@ -651,14 +652,14 @@ class spawn(object):
         else:
             os.close(fd)
 
-    def fileno(self):  # File-like object.
+    def fileno(self) -> typing.BytesIO:
 
         """This returns the file descriptor of the pty for the child.
         """
 
         return self.child_fd
 
-    def close(self, force=True):  # File-like object.
+    def close(self, force=True) -> typing.BytesIO:
 
         """This closes the connection with the child application. Note that
         calling close() more than once is valid. This emulates standard Python
@@ -677,14 +678,14 @@ class spawn(object):
             self.closed = True
             # self.pid = None
 
-    def flush(self):  # File-like object.
+    def flush(self) -> typing.BytesIO:
 
         """This does nothing. It is here to support the interface for a
         File-like object. """
 
         pass
 
-    def isatty(self):  # File-like object.
+    def isatty(self) -> typing.Bytes.IO:
 
         """This returns True if the file descriptor is open and connected to a
         tty(-like) device, else False. """
@@ -880,7 +881,7 @@ class spawn(object):
             return self.after  ### self.before should be ''. Should I assert this?
         return self.before
 
-    def readline(self, size=-1):  # File-like object.
+    def readline(self, size=-1) -> typing.BytesIO :
 
         """This reads and returns one entire line. A trailing newline is kept
         in the string, but may be absent when a file ends with an incomplete
@@ -899,14 +900,14 @@ class spawn(object):
         else:
             return self.before
 
-    def __iter__(self):  # File-like object.
+    def __iter__(self) -> typing.BytesIO:
 
         """This is to support iterators over a file-like object.
         """
 
         return self
 
-    def next(self):  # File-like object.
+    def next(self) -> typing.BytesIO:
 
         """This is to support iterators over a file-like object.
         """
@@ -916,7 +917,7 @@ class spawn(object):
             raise StopIteration
         return result
 
-    def readlines(self, sizehint=-1):  # File-like object.
+    def readlines(self, sizehint=-1) -> typing.BytesIO:
 
         """This reads until EOF using readline() and returns a list containing
         the lines thus read. The optional "sizehint" argument is ignored. """
@@ -929,14 +930,14 @@ class spawn(object):
             lines.append(line)
         return lines
 
-    def write(self, s):  # File-like object.
+    def write(self, s) -> typing.BytesIO:
 
         """This is similar to send() except that there is no return value.
         """
 
         self.send(s)
 
-    def writelines(self, sequence):  # File-like object.
+    def writelines(self, sequence) -> typing.BytesIO :
 
         """This calls write() for each element in the sequence. The sequence
         can be any iterable object producing strings, typically a list of
