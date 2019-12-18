@@ -264,8 +264,8 @@ class spawn(object):
     """This is the main class interface for Pexpect. Use this class to start
     and control child applications. """
 
-    def __init__(self, command, args=[], timeout=30, read_loop_timeout=0.2, maxread=2000, searchwindowsize=None,
-                 logfile=None, cwd=None, env=None):
+    def __init__(self, command, timeout=30, read_loop_timeout=0.2, maxread=2000, searchwindowsize=None,
+                 logfile=None, cwd=None, env=None, *args):
 
         """This is the constructor. The command parameter may be a string that
         includes a command and any arguments to the command. For example::
