@@ -854,7 +854,7 @@ class spawn(object):
 
         raise ExceptionPexpect('Reached an unexpected state in read_nonblocking().')
 
-    def read(self, size=-1):  # File-like object.
+    def read(self, size=-1) -> typing.BytesIO:
 
         """This reads at most "size" bytes from the file (less if the read hits
         EOF before obtaining size bytes). If the size argument is negative or
