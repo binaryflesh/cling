@@ -245,7 +245,7 @@ def run(command, timeout=-1, withexitstatus=False, events=None, extra_args=None,
                     break
             else:
                 raise TypeError('The callback must be a string or function type.')
-            event_count = event_count + 1
+            event_count += 1
         except TIMEOUT, e:
             child_result_list.append(child.before)
             break
