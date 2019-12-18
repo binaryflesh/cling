@@ -500,14 +500,14 @@ class spawn(object):
         # that performs some task; creates no stdout output; and then dies.
 
         # If command is an int type then it may represent a file descriptor.
-        if type(command) == type(0):
+        if isinstance(command, int):
             raise ExceptionPexpect(
                 'Command is an int type. If this is a file descriptor then maybe you want to use fdpexpect.fdspawn which takes an existing file descriptor instead of a command string.')
 
-        if type(args) != type([]):
+        if not isinstance(args, list):
             raise TypeError('The argument, args, must be a list.')
 
-        if args == []:
+        if len(args) == 0:
             self.args = split_command_line(command)
             self.command = self.args[0]
         else:
@@ -516,12 +516,12 @@ class spawn(object):
             self.command = command
 
         command_with_path = which(self.command)
-        if command_with_path is None:
+        if not command_with_path:
             raise ExceptionPexpect('The command was not found or was not executable: %s.' % self.command)
         self.command = command_with_path
         self.args[0] = self.command
 
-        self.name = '<' + ' '.join(self.args) + '>'
+        self.name = f'<{" ".join(self.args)}>'
 
         assert self.pid is None, 'The pid member should be None.'
         assert self.command is not None, 'The command member should not be None.'
@@ -1852,23 +1852,23 @@ def split_command_line(command_line):
                     arg = ''
                     state = state_whitespace
             else:
-                arg = arg + c
+                arg += c
                 state = state_basic
         elif state == state_esc:
-            arg = arg + c
+            arg += c
             state = state_basic
         elif state == state_singlequote:
             if c == r"'":
                 state = state_basic
             else:
-                arg = arg + c
+                arg += c
         elif state == state_doublequote:
             if c == r'"':
                 state = state_basic
             else:
-                arg = arg + c
+                arg += c
 
-    if arg != '':
+    if arg is not '':
         arg_list.append(arg)
     return arg_list
 
