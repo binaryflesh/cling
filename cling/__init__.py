@@ -8,8 +8,6 @@ __all__ = ['Cling', 'Error', 'Reactor']
 class Error(Exception):
     """The module's generic exception"""
 
-    pass
-
 
 from cli import Cling
 from reactor import Reactor
