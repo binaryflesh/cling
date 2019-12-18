@@ -1594,17 +1594,16 @@ class spawn(object):
         """This method is no longer supported or allowed. I don't like getters
         and setters without a good reason. """
 
-        raise ExceptionPexpect(
-            'This method is no longer supported or allowed. Just assign a value to the maxread member variable.')
+        print('This method is no longer supported or allowed. Just assign a value to the maxread member variable.')
+        return
 
     def setlog(self, fileobject):
 
         """This method is no longer supported or allowed.
         """
-
-        raise ExceptionPexpect(
-            'This method is no longer supported or allowed. Just assign a value to the logfile member variable.')
-
+        
+        print('This method is no longer supported or allowed. Just assign a value to the logfile member variable.')
+        return
 
 ##############################################################################
 # End of spawn class
